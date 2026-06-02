@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Marian · Energía Cuántica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #020918;
+  --navy2:   #050f28;
+  --navy3:   #0a1a40;
+  --blue:    #1a3a6e;
+  --cobalt:  #1e4db7;
+  --silver:  #c8d8f0;
+  --silver2: #8faad4;
+  --silver3: #4a6a9a;
+  --gold:    #d4b86a;
+  --gold-l:  #f0d898;
+  --gold-d:  #7a6030;
+  --white:   #e8f0ff;
+  --muted:   #8faad4;
+  --muted2:  #4a6a9a;
+  --pro:     #7ab8f5;
+  --pro2:    #c8e0ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--navy);
+  color:var(--white);
+  font-family:'Cormorant Garamond',serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── COSMOS ── */
+.cosmos{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 10%, rgba(30,77,183,.22) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 85% 80%, rgba(122,184,245,.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(26,58,110,.15) 0%, transparent 60%),
+    var(--navy);
+}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.stars::before,.stars::after{content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 7% 11%, rgba(200,216,240,.8) 0%,transparent 100%),
+    radial-gradient(1px 1px at 19% 6%,  rgba(200,216,240,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 34% 22%, rgba(212,184,106,.9) 0%,transparent 100%),
+    radial-gradient(1px 1px at 52% 4%,  rgba(200,216,240,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 68% 16%, rgba(200,216,240,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 84% 8%,  rgba(200,216,240,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 4%  44%, rgba(200,216,240,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 16% 58%, rgba(122,184,245,.9) 0%,transparent 100%),
+    radial-gradient(1px 1px at 63% 48%, rgba(200,216,240,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 79% 40%, rgba(200,216,240,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 93% 53%, rgba(212,184,106,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 11% 76%, rgba(200,216,240,.4) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 28% 86%, rgba(212,184,106,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 47% 68%, rgba(200,216,240,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 76% 80%, rgba(200,216,240,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 90% 90%, rgba(122,184,245,.5) 0%,transparent 100%);
+  animation:twinkle 8s ease-in-out infinite alternate;
+}
+.stars::after{transform:rotate(30deg) scale(1.2);opacity:.4;animation-delay:4s;}
+@keyframes twinkle{0%{opacity:.7;}100%{opacity:1;}}
+
+/* ── NEBULA ── */
+.nebula{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.neb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;}
+.neb1{width:500px;height:500px;background:radial-gradient(#1e4db7,transparent);top:-100px;left:-100px;animation:drift1 20s ease-in-out infinite alternate;}
+.neb2{width:400px;height:400px;background:radial-gradient(#7ab8f5,transparent);bottom:-80px;right:-80px;animation:drift2 25s ease-in-out infinite alternate;}
+.neb3{width:300px;height:300px;background:radial-gradient(#d4b86a,transparent);top:40%;left:50%;animation:drift3 18s ease-in-out infinite alternate;}
+@keyframes drift1{0%{transform:translate(0,0);}100%{transform:translate(60px,40px);}}
+@keyframes drift2{0%{transform:translate(0,0);}100%{transform:translate(-50px,-40px);}}
+@keyframes drift3{0%{transform:translate(-50%,-50%);}100%{transform:translate(calc(-50% + 40px),calc(-50% + 30px));}}
+
+/* ── APP WRAP ── */
+.app{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 16px 80px;}
+
+/* ── HEADER ── */
+.header{text-align:center;padding:36px 0 28px;}
+
+/* LOGO / FOTO */
+.logo-area{position:relative;display:inline-block;margin-bottom:18px;}
+.logo-ring{
+  width:110px;height:110px;border-radius:50%;
+  border:2px solid rgba(212,184,106,.4);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  box-shadow:0 0 40px rgba(30,77,183,.5),0 0 80px rgba(122,184,245,.15);
+  animation:pulse-ring 4s ease-in-out infinite;
+}
+@keyframes pulse-ring{
+  0%,100%{box-shadow:0 0 30px rgba(30,77,183,.4),0 0 60px rgba(122,184,245,.1);}
+  50%{box-shadow:0 0 50px rgba(30,77,183,.7),0 0 100px rgba(122,184,245,.25);}
+}
+.logo-ring::before{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(212,184,106,.2);animation:spin 20s linear infinite;
+}
+.logo-ring::after{
+  content:'';position:absolute;inset:-16px;border-radius:50%;
+  border:1px dashed rgba(122,184,245,.15);animation:spin 30s linear infinite reverse;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Placeholder icono (se reemplaza con foto) */
+.logo-placeholder{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,#0a1a40,#1a3a6e);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.6rem;
+  overflow:hidden;
+}
+.logo-placeholder img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+
+/* Botón subir foto */
+.upload-btn{
+  position:absolute;bottom:2px;right:2px;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--gold);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;z-index:5;
+  box-shadow:0 2px 10px rgba(0,0,0,.4);
+  transition:transform .2s;
+}
+.upload-btn:hover{transform:scale(1.15);}
+#fotoInput{display:none;}
+
+/* Péndulo animado (si no hay foto) */
+.pendulo-swing{animation:swing 4s ease-in-out infinite;transform-origin:top center;display:inline-block;}
+@keyframes swing{0%,100%{transform:rotate(-14deg);}50%{transform:rotate(14deg);}}
+
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.1rem,5vw,1.75rem);
+  color:var(--silver);letter-spacing:.06em;
+  text-shadow:0 0 40px rgba(122,184,245,.5),0 0 80px rgba(30,77,183,.3);}
+h1 span{color:var(--gold);}
+.tagline{font-size:.92rem;color:var(--muted);font-style:italic;margin-top:6px;letter-spacing:.08em;}
+.tagline-sub{font-size:.78rem;color:var(--muted2);margin-top:4px;letter-spacing:.12em;}
+
+/* ── PRO BANNER ── */
+.pro-banner{
+  background:linear-gradient(135deg,rgba(122,184,245,.1),rgba(30,77,183,.08));
+  border:1px solid rgba(122,184,245,.3);border-radius:14px;
+  padding:14px 18px;display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;cursor:pointer;transition:all .3s;
+}
+.pro-banner:hover{border-color:var(--pro);box-shadow:0 0 30px rgba(122,184,245,.2);}
+.pro-banner-icon{font-size:1.8rem;flex-shrink:0;}
+.pb-text h3{font-family:'Cinzel Decorative',cursive;font-size:.72rem;color:var(--pro);letter-spacing:.12em;}
+.pb-text p{font-size:.83rem;color:var(--muted);margin-top:3px;}
+.pro-chip{background:linear-gradient(135deg,var(--cobalt),var(--pro));color:#fff;
+  font-family:'Cinzel Decorative',cursive;font-size:.58rem;
+  padding:4px 12px;border-radius:20px;letter-spacing:.1em;margin-left:auto;flex-shrink:0;}
+
+/* ── SECTION ── */
+.section{
+  background:linear-gradient(145deg,rgba(10,26,64,.7),rgba(2,9,24,.88));
+  border:1px solid rgba(122,184,245,.15);
+  border-radius:18px;padding:24px;margin-bottom:20px;
+  backdrop-filter:blur(14px);position:relative;overflow:hidden;
+}
+.section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,transparent,rgba(122,184,245,.4),rgba(212,184,106,.3),transparent);}
+.section-title{font-family:'Cinzel Decorative',cursive;font-size:.7rem;
+  color:var(--silver2);letter-spacing:.18em;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;}
+.section-title .ic{font-size:1.1rem;}
+
+/* ── FORM ── */
+.field{margin-bottom:16px;}
+label{display:block;font-size:.88rem;color:var(--muted);font-style:italic;margin-bottom:6px;letter-spacing:.04em;}
+input[type=text],select,textarea{
+  width:100%;background:rgba(2,9,24,.75);
+  border:1px solid rgba(122,184,245,.2);border-radius:10px;
+  color:var(--white);font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;padding:12px 15px;outline:none;
+  transition:border-color .3s,box-shadow .3s;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--pro);box-shadow:0 0 20px rgba(122,184,245,.15);}
+select option{background:var(--navy2);}
+textarea{resize:none;min-height:70px;}
+.free-note{font-size:.78rem;color:var(--muted2);font-style:italic;text-align:center;margin-top:10px;}
+
+/* ── BUTTONS ── */
+.btn{width:100%;padding:15px;border:none;border-radius:12px;
+  font-family:'Cinzel Decorative',cursive;font-size:.7rem;letter-spacing:.15em;
+  cursor:pointer;transition:all .3s;}
+.btn-silver{
+  background:linear-gradient(135deg,#2a4a80,#4a7ab0,#8aaad4,#4a7ab0,#2a4a80);
+  background-size:300% 100%;color:var(--navy);
+  box-shadow:0 4px 30px rgba(122,184,245,.3);
+}
+.btn-silver:hover{background-position:100% 0;box-shadow:0 6px 40px rgba(122,184,245,.5);transform:translateY(-1px);}
+.btn-silver:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l),var(--gold),var(--gold-d));
+  background-size:300% 100%;color:var(--navy);margin-top:10px;
+  box-shadow:0 4px 30px rgba(212,184,106,.3);
+}
+.btn-gold:hover{background-position:100% 0;box-shadow:0 6px 40px rgba(212,184,106,.5);transform:translateY(-1px);}
+.btn-outline{background:transparent;border:1px solid rgba(122,184,245,.25);
+  color:var(--silver2);margin-top:12px;}
+.btn-outline:hover{background:rgba(122,184,245,.07);}
+
+/* ── LOADING ── */
+.loading{display:none;text-align:center;padding:50px 20px;}
+.loading.on{display:block;}
+.load-pend{font-size:3.5rem;display:inline-block;
+  animation:swing 1.4s ease-in-out infinite;transform-origin:top center;
+  filter:drop-shadow(0 0 20px rgba(122,184,245,.7));}
+.load-msg{color:var(--muted);font-style:italic;font-size:1rem;margin-top:16px;
+  animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:.35;}50%{opacity:1;}}
+.load-dots{display:flex;justify-content:center;gap:8px;margin-top:20px;}
+.load-dot{width:8px;height:8px;border-radius:50%;background:var(--pro);
+  animation:dp 1.4s ease-in-out infinite;}
+.load-dot:nth-child(2){animation-delay:.2s;}
+.load-dot:nth-child(3){animation-delay:.4s;}
+@keyframes dp{0%,100%{transform:scale(.5);opacity:.3;}50%{transform:scale(1);opacity:1;}}
+
+/* ── RESULTS ── */
+.results{display:none;}
+.results.on{display:block;}
+
+/* ESTADO BADGE */
+.estado-badge{display:inline-flex;align-items:center;gap:8px;
+  padding:8px 22px;border-radius:30px;
+  font-family:'Cinzel Decorative',cursive;font-size:.68rem;letter-spacing:.12em;}
+.e-MUY_MALO{background:rgba(220,38,38,.12);color:#ef4444;border:1px solid rgba(220,38,38,.4);}
+.e-MALO{background:rgba(234,88,12,.12);color:#f97316;border:1px solid rgba(234,88,12,.4);}
+.e-REGULAR{background:rgba(234,179,8,.12);color:#eab308;border:1px solid rgba(234,179,8,.4);}
+.e-BUENO{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.4);}
+.e-MUY_BUENO{background:rgba(122,184,245,.12);color:var(--pro);border:1px solid rgba(122,184,245,.4);}
+
+/* ENERGY CIRCLE */
+.e-circle-wrap{text-align:center;padding:10px 0 20px;}
+.e-circle{width:170px;height:170px;border-radius:50%;margin:0 auto 16px;
+  position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.e-circle svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.e-val{font-family:'Cinzel Decorative',cursive;font-size:2.4rem;color:var(--silver);
+  position:relative;z-index:1;text-shadow:0 0 25px rgba(122,184,245,.7);}
+.e-lbl{font-size:.72rem;color:var(--muted);position:relative;z-index:1;letter-spacing:.1em;}
+.e-desc{font-size:.95rem;color:var(--muted);font-style:italic;
+  max-width:340px;margin:0 auto;line-height:1.8;}
+
+/* CHAKRAS */
+.chakra-list{display:flex;flex-direction:column;gap:12px;}
+.chakra-row{display:grid;grid-template-columns:42px 1fr 44px;align-items:center;gap:12px;}
+.c-dot{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;border:2px solid;animation:cglow 3s ease-in-out infinite;}
+@keyframes cglow{0%,100%{box-shadow:0 0 8px var(--cc,#888);}50%{box-shadow:0 0 22px var(--cc,#888);}}
+.c-name{font-size:.88rem;color:var(--white);margin-bottom:4px;}
+.c-bar-bg{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.c-bar{height:100%;border-radius:3px;transition:width 1.8s cubic-bezier(.4,0,.2,1);width:0;}
+.c-state{font-size:.7rem;color:var(--muted);font-style:italic;margin-top:3px;}
+.c-pct{font-size:.83rem;color:var(--muted);text-align:right;}
+
+/* EMOCIONES */
+.emoc-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.emoc-tag{padding:6px 14px;border-radius:20px;font-size:.82rem;border:1px solid;}
+.emoc-bloqueada{border-color:rgba(239,68,68,.4);color:#ef4444;background:rgba(239,68,68,.07);}
+.emoc-limitante{border-color:rgba(234,179,8,.4);color:#eab308;background:rgba(234,179,8,.07);}
+
+/* INTERFERENCIAS */
+.interf-list{display:flex;flex-direction:column;gap:10px;}
+.interf-item{display:flex;align-items:flex-start;gap:14px;
+  padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.05);
+  background:rgba(2,9,24,.3);}
+.interf-item.detected{border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05);}
+.interf-item.clear{border-color:rgba(16,185,129,.18);background:rgba(16,185,129,.04);}
+.i-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
+.i-name{font-size:.9rem;color:var(--white);margin-bottom:2px;}
+.i-status{font-size:.78rem;font-style:italic;}
+.detected .i-status{color:#ef4444;}
+.clear .i-status{color:#10b981;}
+.i-nivel{font-size:.73rem;color:var(--muted);margin-top:3px;}
+
+/* LOCK */
+.lock-wrap{position:relative;}
+.lock-overlay{position:absolute;inset:0;border-radius:18px;
+  background:linear-gradient(to bottom,rgba(2,9,24,0) 0%,rgba(2,9,24,.97) 38%);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:28px 24px;z-index:10;}
+.lock-icon{font-size:2rem;margin-bottom:8px;}
+.lock-title{font-family:'Cinzel Decorative',cursive;font-size:.72rem;
+  color:var(--pro);letter-spacing:.12em;margin-bottom:6px;}
+.lock-desc{font-size:.87rem;color:var(--muted);font-style:italic;
+  text-align:center;line-height:1.6;margin-bottom:16px;}
+
+/* MED / RITUAL */
+.med-card,.ritual-card{background:rgba(2,9,24,.45);
+  border:1px solid rgba(122,184,245,.12);border-radius:12px;padding:18px;margin-bottom:12px;}
+.card-title{font-family:'Cinzel Decorative',cursive;font-size:.68rem;
+  color:var(--silver2);letter-spacing:.1em;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;}
+.card-body{font-size:.9rem;color:var(--muted);line-height:1.8;}
+.steps{list-style:none;padding:0;}
+.steps li{padding:5px 0;padding-left:18px;position:relative;font-size:.88rem;color:var(--white);}
+.steps li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:.58rem;top:8px;}
+
+/* MENSAJE */
+.mensaje-box{
+  background:linear-gradient(135deg,rgba(30,77,183,.1),rgba(122,184,245,.05));
+  border:1px solid rgba(122,184,245,.2);border-radius:14px;padding:22px;
+  font-size:1rem;line-height:1.9;color:var(--white);font-style:italic;position:relative;
+}
+.mensaje-box::before{content:'"';position:absolute;top:-14px;left:20px;
+  font-size:4rem;color:rgba(122,184,245,.25);font-family:Georgia,serif;line-height:1;}
+
+/* FIRMA */
+.firma{text-align:center;margin-top:20px;padding:16px;
+  border-top:1px solid rgba(122,184,245,.1);}
+.firma-nombre{font-family:'Cinzel Decorative',cursive;font-size:.72rem;
+  color:var(--gold);letter-spacing:.18em;}
+.firma-sub{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:4px;}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:100;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-bg.on{opacity:1;pointer-events:all;}
+.modal{
+  background:linear-gradient(145deg,rgba(10,26,64,.98),rgba(2,9,24,.99));
+  border:1px solid rgba(122,184,245,.3);border-radius:22px;
+  max-width:440px;width:100%;padding:32px 26px;position:relative;
+  max-height:90vh;overflow-y:auto;
+  box-shadow:0 20px 80px rgba(30,77,183,.4);
+}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;
+  color:var(--muted);font-size:1.4rem;cursor:pointer;}
+.modal h2{font-family:'Cinzel Decorative',cursive;font-size:.95rem;
+  color:var(--silver);letter-spacing:.1em;text-align:center;margin-bottom:6px;}
+.modal-sub{text-align:center;font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:24px;}
+
+/* Foto Marian en modal */
+.modal-foto{text-align:center;margin-bottom:18px;}
+.modal-foto-ring{width:72px;height:72px;border-radius:50%;margin:0 auto;
+  border:2px solid rgba(212,184,106,.4);
+  background:linear-gradient(135deg,var(--navy3),var(--blue));
+  display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;}
+.modal-foto-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.modal-foto-name{font-family:'Cinzel Decorative',cursive;font-size:.7rem;
+  color:var(--gold);letter-spacing:.12em;margin-top:8px;}
+
+.plan-card{border-radius:14px;padding:18px;margin-bottom:14px;border:1px solid;}
+.plan-free{border-color:rgba(122,184,245,.2);background:rgba(30,77,183,.05);}
+.plan-pro{border-color:rgba(212,184,106,.35);background:rgba(212,184,106,.05);}
+.plan-name{font-family:'Cinzel Decorative',cursive;font-size:.7rem;letter-spacing:.12em;margin-bottom:8px;}
+.plan-free .plan-name{color:var(--silver2);}
+.plan-pro .plan-name{color:var(--gold);}
+.plan-price{font-size:1.8rem;color:var(--white);margin-bottom:12px;}
+.plan-price span{font-size:.83rem;color:var(--muted);}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.plan-features li{font-size:.86rem;color:var(--muted);display:flex;align-items:flex-start;gap:8px;}
+.plan-features li .ok{color:#22c55e;flex-shrink:0;}
+.plan-features li .no{color:var(--muted2);flex-shrink:0;}
+.modal-disc{font-size:.7rem;color:var(--muted2);font-style:italic;text-align:center;margin-top:14px;line-height:1.6;}
+
+/* SOCIAL LINKS */
+.social-bar{display:flex;justify-content:center;gap:12px;margin:18px 0 0;}
+.social-btn{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:30px;
+  border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:.95rem;
+  font-weight:600;text-decoration:none;transition:all .3s;letter-spacing:.03em;}
+.social-wa{background:linear-gradient(135deg,#075e54,#128c7e);color:#fff;
+  box-shadow:0 4px 20px rgba(18,140,126,.3);}
+.social-wa:hover{box-shadow:0 6px 28px rgba(18,140,126,.5);transform:translateY(-1px);}
+.social-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#f77737);color:#fff;
+  box-shadow:0 4px 20px rgba(253,29,29,.25);}
+.social-ig:hover{box-shadow:0 6px 28px rgba(253,29,29,.4);transform:translateY(-1px);}
+.social-footer{display:flex;justify-content:center;gap:10px;margin-top:16px;}
+.social-footer a{display:flex;align-items:center;gap:6px;
+  font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.social-footer a:hover{color:var(--silver);}
+.mp-badge{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,158,227,.12);border:1px solid rgba(0,158,227,.3);
+  border-radius:8px;padding:8px 14px;font-size:.82rem;color:#4ab8f0;margin-top:4px;}
+.modal-or{text-align:center;font-size:.78rem;color:var(--muted2);
+  font-style:italic;margin:12px 0 8px;}
+
+/* DIV */
+.div-line{display:flex;align-items:center;gap:10px;margin:8px 0 18px;}
+.div-line::before,.div-line::after{content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(122,184,245,.25),transparent);}
+.div-line span{color:var(--silver2);font-size:.9rem;}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(18px);animation:fi .7s ease forwards;}
+@keyframes fi{to{opacity:1;transform:translateY(0);}}
+.fi:nth-child(1){animation-delay:.05s;}.fi:nth-child(2){animation-delay:.18s;}
+.fi:nth-child(3){animation-delay:.31s;}.fi:nth-child(4){animation-delay:.44s;}
+.fi:nth-child(5){animation-delay:.57s;}.fi:nth-child(6){animation-delay:.70s;}
+.fi:nth-child(7){animation-delay:.83s;}.fi:nth-child(8){animation-delay:.96s;}
+
+.disc{text-align:center;font-size:.7rem;color:rgba(143,170,212,.35);
+  font-style:italic;margin-top:28px;line-height:1.8;padding:0 10px;}
+</style>
+</head>
+<body>
+<div class="cosmos"></div>
+<div class="stars"></div>
+<div class="nebula">
+  <div class="neb neb1"></div>
+  <div class="neb neb2"></div>
+  <div class="neb neb3"></div>
+</div>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-ring">
+        <div class="logo-placeholder" id="logoPlaceholder">
+          <span class="pendulo-swing">🔮</span>
+        </div>
+      </div>
+      <button class="upload-btn" onclick="document.getElementById('fotoInput').click()" title="Subir tu foto">📷</button>
+      <input type="file" id="fotoInput" accept="image/*" onchange="cargarFoto(event)">
+    </div>
+    <h1><span>Marian</span> · Energía Cuántica</h1>
+    <p class="tagline">Radiestesia · Péndulo · Registros Akáshicos</p>
+    <p class="tagline-sub">✦ LECTURA ENERGÉTICA DEL ALMA ✦</p>
+    <div class="social-footer">
+      <a href="https://wa.me/5493873268009" target="_blank">💬 WhatsApp</a>
+      <span style="color:var(--muted2);">·</span>
+      <a href="https://instagram.com/_mariana.fernandez" target="_blank">📸 @_mariana.fernandez</a>
+    </div>
+  </div>
+
+  <!-- PRO BANNER -->
+  <div class="pro-banner" onclick="openModal()">
+    <div class="pro-banner-icon">✨</div>
+    <div class="pb-text">
+      <h3>LECTURA PRO DISPONIBLE</h3>
+      <p>Emociones, meditaciones, rituales personalizados y más</p>
+    </div>
+    <div class="pro-chip">VER PLANES</div>
+  </div>
+
+  <!-- FORM -->
+  <div class="section" id="formSec">
+    <div class="section-title"><span class="ic">✧</span> Tu Lectura Energética</div>
+
+    <div class="field">
+      <label>Tu nombre completo</label>
+      <input type="text" id="nombre" placeholder="Ingresá tu nombre..." />
+    </div>
+    <div class="field">
+      <label>¿Cómo te sentís energéticamente hoy?</label>
+      <select id="sensacion">
+        <option value="">— Seleccioná —</option>
+        <option value="muy_mal">Muy mal, agotado/a por completo</option>
+        <option value="pesado">Pesado/a, sin energía ni motivación</option>
+        <option value="ansioso">Ansioso/a, agitado/a sin razón</option>
+        <option value="triste">Triste, apagado/a</option>
+        <option value="confundido">Confundido/a, perdido/a</option>
+        <option value="regular">Regular, ni bien ni mal</option>
+        <option value="bien">Bastante bien</option>
+        <option value="excelente">¡Con mucha energía y claridad!</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>¿Desde cuándo notás algo diferente?</label>
+      <select id="tiempo">
+        <option value="">— Seleccioná —</option>
+        <option value="hoy">Desde hoy</option>
+        <option value="dias">Hace algunos días</option>
+        <option value="semanas">Hace semanas</option>
+        <option value="meses">Hace meses o más</option>
+        <option value="siempre">Siempre fue así</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>¿Hay algo que te preocupa o querés consultar? (opcional)</label>
+      <textarea id="preocupa" placeholder="Relaciones, trabajo, salud, sueños, bloqueos..."></textarea>
+    </div>
+
+    <p class="free-note">✦ Gratis: nivel energético · 7 chakras · 10 interferencias · mensaje</p>
+    <button class="btn btn-silver" onclick="iniciar(false)">✦ LEER MI ENERGÍA GRATIS ✦</button>
+    <button class="btn btn-gold" onclick="iniciar(true)">★ LECTURA COMPLETA PRO ★</button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loadSec">
+    <div class="load-pend">🔮</div>
+    <p class="load-msg" id="loadMsg">El péndulo está sintonizando tu energía...</p>
+    <div class="load-dots">
+      <div class="load-dot"></div><div class="load-dot"></div><div class="load-dot"></div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="resSec">
+
+    <!-- 1. ESTADO GENERAL -->
+    <div class="section fi">
+      <div class="section-title"><span class="ic">⚡</span> Estado Energético General</div>
+      <div class="e-circle-wrap">
+        <div class="e-circle">
+          <svg viewBox="0 0 170 170" width="170" height="170">
+            <circle cx="85" cy="85" r="72" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9"/>
+            <circle id="eArc" cx="85" cy="85" r="72" fill="none" stroke="url(#sg)" stroke-width="9"
+              stroke-dasharray="452.4" stroke-dashoffset="452.4" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4a7ab0"/>
+                <stop offset="50%" style="stop-color:#7ab8f5"/>
+                <stop offset="100%" style="stop-color:#c8e0ff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="e-val" id="eVal">0%</div>
+          <div class="e-lbl">VIBRACIÓN</div>
+        </div>
+        <div style="text-align:center;margin-bottom:12px;" id="estadoBadgeWrap"></div>
+        <p class="e-desc" id="eDesc"></p>
+      </div>
+    </div>
+
+    <!-- 2. CHAKRAS -->
+    <div class="section fi">
+      <div class="section-title"><span class="ic">☯</span> Estado de los 7 Chakras</div>
+      <div class="chakra-list" id="chakraList"></div>
+    </div>
+
+    <!-- 3. EMOCIONES (PRO) -->
+    <div class="section fi lock-wrap" id="sec-emoc">
+      <div class="section-title"><span class="ic">💙</span> Emociones Bloqueadas y Limitantes</div>
+      <div class="emoc-grid" id="emocGrid" style="filter:blur(4px);pointer-events:none;min-height:80px;"></div>
+      <div class="lock-overlay" id="emocLock">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-title">FUNCIÓN PRO</div>
+        <div class="lock-desc">Descubrí qué emociones están bloqueando o limitando tu campo energético</div>
+        <button class="btn btn-gold" style="width:auto;padding:12px 28px;" onclick="openModal()">★ DESBLOQUEAR CON PRO</button>
+      </div>
+    </div>
+
+    <!-- 4. INTERFERENCIAS -->
+    <div class="section fi">
+      <div class="section-title"><span class="ic">⚠</span> Interferencias Energéticas</div>
+      <!-- FREE: solo Larvas y Tapón -->
+      <div class="interf-list" id="interfListFree"></div>
+      <!-- PRO: resto de interferencias -->
+      <div class="lock-wrap" id="interfProWrap" style="margin-top:10px;">
+        <div class="interf-list" id="interfListPro" style="filter:blur(4px);pointer-events:none;min-height:160px;"></div>
+        <div class="lock-overlay" id="interfLock">
+          <div class="lock-icon">🔒</div>
+          <div class="lock-title">FUNCIÓN PRO</div>
+          <div class="lock-desc">Descubrí si tenés Brujería, Magia Negra, Mal de Ojo, Entidades, Almas en Pena, Envidia, Contratos Kármicos y más</div>
+          <button class="btn btn-gold" style="width:auto;padding:12px 28px;" onclick="openModal()">★ DESBLOQUEAR CON PRO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MEDITACIÓN (PRO) -->
+    <div class="section fi lock-wrap" id="sec-med">
+      <div class="section-title"><span class="ic">🧘</span> Meditación Personalizada</div>
+      <div style="filter:blur(5px);pointer-events:none;min-height:120px;" id="medContent">
+        <div class="med-card"><div class="card-title">🌙 Meditación de Limpieza</div>
+        <div class="card-body">Cargando tu meditación personalizada...</div></div>
+      </div>
+      <div class="lock-overlay" id="medLock">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-title">FUNCIÓN PRO</div>
+        <div class="lock-desc">Recibí una meditación guiada diseñada específicamente para tu estado energético actual</div>
+        <button class="btn btn-gold" style="width:auto;padding:12px 28px;" onclick="openModal()">★ DESBLOQUEAR CON PRO</button>
+      </div>
+    </div>
+
+    <!-- 6. RITUAL (PRO) -->
+    <div class="section fi lock-wrap" id="sec-ritual">
+      <div class="section-title"><span class="ic">🕯️</span> Ritual Recomendado</div>
+      <div style="filter:blur(5px);pointer-events:none;min-height:120px;" id="ritualContent">
+        <div class="ritual-card"><div class="card-title">🕯️ Ritual de Limpieza y Protección</div>
+        <div class="card-body">Cargando tu ritual personalizado...</div></div>
+      </div>
+      <div class="lock-overlay" id="ritualLock">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-title">FUNCIÓN PRO</div>
+        <div class="lock-desc">Ritual específico con velas, cristales e incienso para limpiar y elevar tu energía</div>
+        <button class="btn btn-gold" style="width:auto;padding:12px 28px;" onclick="openModal()">★ DESBLOQUEAR CON PRO</button>
+      </div>
+    </div>
+
+    <!-- 7. MENSAJE -->
+    <div class="section fi">
+      <div class="section-title"><span class="ic">✨</span> Mensaje del Péndulo</div>
+      <div class="mensaje-box" id="msgBox"></div>
+    </div>
+
+    <!-- FIRMA -->
+    <div class="firma fi">
+      <div class="firma-nombre">✦ MARIAN · ENERGÍA CUÁNTICA ✦</div>
+      <div class="firma-sub">Radiestesia · Péndulo · Registros Akáshicos</div>
+      <div class="social-bar">
+        <a class="social-btn social-wa" href="https://wa.me/5493873268009?text=Hola%20Marian!%20Hice%20mi%20lectura%20energ%C3%A9tica%20y%20quiero%20saber%20m%C3%A1s%20%F0%9F%94%AE" target="_blank">
+          <span>💬</span> WhatsApp
+        </a>
+        <a class="social-btn social-ig" href="https://instagram.com/_mariana.fernandez" target="_blank">
+          <span>📸</span> Instagram
+        </a>
+      </div>
+    </div>
+
+    <div class="div-line" style="margin-top:20px;"><span>✦</span></div>
+    <button class="btn btn-gold fi" onclick="openModal()">★ OBTENER LECTURA PRO COMPLETA ★</button>
+    <button class="btn btn-outline fi" onclick="reset()">↩ Nueva Lectura</button>
+  </div>
+
+  <p class="disc">
+    Marian · Energía Cuántica · Radiestesia y Péndulo<br>
+    Esta lectura es una herramienta de autoconocimiento espiritual.<br>
+    No reemplaza diagnóstico médico ni atención profesional.
+  </p>
+</div>
+
+<!-- MODAL PLANES -->
+<div class="modal-bg" id="modalBg" onclick="closeModalOut(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div class="modal-foto">
+      <div class="modal-foto-ring" id="modalFotoRing">🔮</div>
+      <div class="modal-foto-name">✦ MARIAN · ENERGÍA CUÁNTICA ✦</div>
+    </div>
+
+    <h2>ELEGÍ TU PLAN</h2>
+    <p class="modal-sub">Conectate con tu energía a un nivel más profundo</p>
+
+    <div class="plan-card plan-free">
+      <div class="plan-name">✦ PLAN GRATUITO</div>
+      <div class="plan-price">$0 <span>/ siempre gratis</span></div>
+      <ul class="plan-features">
+        <li><span class="ok">✓</span>Estado energético (% y nivel: muy malo → muy bueno)</li>
+        <li><span class="ok">✓</span>Los 7 chakras con porcentaje y estado</li>
+        <li><span class="ok">✓</span>Larvas Energéticas y Tapón Energético</li>
+        <li><span class="ok">✓</span>Mensaje personalizado del péndulo</li>
+        <li><span class="no">✗</span>8 interferencias restantes (Brujería, Mal de Ojo, etc.)</li>
+        <li><span class="no">✗</span>Emociones bloqueadas y limitantes</li>
+        <li><span class="no">✗</span>Meditación guiada personalizada</li>
+        <li><span class="no">✗</span>Ritual con velas y cristales</li>
+      </ul>
+    </div>
+
+    <div class="plan-card plan-pro">
+      <div class="plan-name">★ PLAN PRO · MARIAN</div>
+      <div class="plan-price">$9.99 <span>ARS / mes · cancelá cuando quieras</span></div>
+      <ul class="plan-features">
+        <li><span class="ok">✓</span>Todo lo del plan gratuito</li>
+        <li><span class="ok">✓</span>Las 10 interferencias completas: Brujería, Magia Negra, Mal de Ojo, Almas en Pena, Entidades, Envidia, Bloqueos y Contratos Kármicos</li>
+        <li><span class="ok">✓</span>Emociones bloqueadas y limitantes detalladas</li>
+        <li><span class="ok">✓</span>Meditación guiada paso a paso personalizada</li>
+        <li><span class="ok">✓</span>Ritual con velas, cristales e incienso específico</li>
+        <li><span class="ok">✓</span>Lecturas ilimitadas sin restricciones</li>
+        <li><span class="ok">✓</span>Historial de tus lecturas</li>
+        <li><span class="ok">✓</span>Atención directa con Marian</li>
+      </ul>
+    </div>
+
+    <button class="btn btn-gold" onclick="irAMercadoPago()">★ SUSCRIBIRME · $9.99 ARS/mes ★</button>
+
+    <div class="modal-or">— o coordiná tu suscripción directamente con Marian —</div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <a class="social-btn social-wa" href="https://wa.me/5493873268009?text=Hola%20Marian!%20Quiero%20suscribirme%20al%20Plan%20Pro%20de%20Energ%C3%ADa%20Cu%C3%A1ntica%20%F0%9F%94%AE" target="_blank" style="font-size:.88rem;padding:10px 16px;">
+        💬 Contratar por WhatsApp
+      </a>
+      <a class="social-btn social-ig" href="https://instagram.com/_mariana.fernandez" target="_blank" style="font-size:.88rem;padding:10px 16px;">
+        📸 Instagram
+      </a>
+    </div>
+
+    <p class="modal-disc">
+      Pago seguro vía MercadoPago · marianafernandez.mp<br>
+      Cancelá en cualquier momento sin cargos adicionales.
+    </p>
+  </div>
+</div>
+
+<script>
+const CHAKRAS=[
+  {name:'Corona (Sahasrara)',emoji:'🟣',color:'#9333ea',key:'corona'},
+  {name:'Tercer Ojo (Ajna)',emoji:'🔵',color:'#6366f1',key:'tercer_ojo'},
+  {name:'Garganta (Vishuddha)',emoji:'🩵',color:'#06b6d4',key:'garganta'},
+  {name:'Corazón (Anahata)',emoji:'💚',color:'#22c55e',key:'corazon'},
+  {name:'Plexo Solar (Manipura)',emoji:'💛',color:'#eab308',key:'plexo'},
+  {name:'Sacro (Svadhisthana)',emoji:'🟠',color:'#f97316',key:'sacro'},
+  {name:'Raíz (Muladhara)',emoji:'🔴',color:'#ef4444',key:'raiz'},
+];
+const INTERFS=[
+  {name:'Bloqueos Energéticos',icon:'🧱'},
+  {name:'Almas en Pena',icon:'👻'},
+  {name:'Brujería / Hechizos',icon:'🕸️'},
+  {name:'Entidades Negativas',icon:'🌑'},
+  {name:'Larvas Energéticas',icon:'🪱'},
+  {name:'Magia Negra',icon:'🖤'},
+  {name:'Mal de Ojo',icon:'👁'},
+  {name:'Envidia',icon:'💢'},
+  {name:'Tapón Energético',icon:'🔒'},
+  {name:'Contratos Kármicos',icon:'📜'},
+];
+const ESTADOS_CHAKRA=['Bloqueado','Débil','En proceso','Activo','Abierto','Radiante'];
+const MSGS_LOAD=[
+  'El péndulo está sintonizando tu energía...',
+  'Marian escanea tu campo áurico...',
+  'Analizando tus 7 chakras...',
+  'Detectando interferencias energéticas...',
+  'Leyendo tus emociones más profundas...',
+  'Canalizando el mensaje del universo para vos...',
+];
+
+let isPro=false;
+let fotoDataUrl=null;
+
+function cargarFoto(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    fotoDataUrl=ev.target.result;
+    // Actualizar header
+    const lp=document.getElementById('logoPlaceholder');
+    lp.innerHTML=`<img src="${fotoDataUrl}" alt="Marian">`;
+    // Actualizar modal
+    const mf=document.getElementById('modalFotoRing');
+    mf.innerHTML=`<img src="${fotoDataUrl}" alt="Marian">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function iniciar(pro){
+  const nombre=document.getElementById('nombre').value.trim();
+  const sensacion=document.getElementById('sensacion').value;
+  const tiempo=document.getElementById('tiempo').value;
+  const preocupa=document.getElementById('preocupa').value.trim();
+  if(!nombre||!sensacion||!tiempo){
+    alert('Por favor completá tu nombre, cómo te sentís y desde cuándo.');return;
+  }
+  isPro=pro;
+  document.getElementById('formSec').style.display='none';
+  document.getElementById('loadSec').classList.add('on');
+  document.getElementById('resSec').classList.remove('on');
+  let mi=0;
+  const msgEl=document.getElementById('loadMsg');
+  const iv=setInterval(()=>{mi=(mi+1)%MSGS_LOAD.length;msgEl.textContent=MSGS_LOAD[mi];},1300);
+
+  try{
+    const prompt=`Sos Marian, experta en radiestesia, chakras, péndulo y registros akáshicos.
+El usuario se llama ${nombre}. Se siente "${sensacion}". Lleva "${tiempo}" así.${preocupa?` Le preocupa: "${preocupa}".`:''}
+
+Generá una lectura energética completa, profunda y personalizada. Respondé SOLO con JSON puro sin backticks:
+{
+  "energia_pct": número 0-100 coherente con su estado,
+  "estado": "MUY_MALO" o "MALO" o "REGULAR" o "BUENO" o "MUY_BUENO",
+  "estado_label": "Energía Muy Baja" / "Energía Baja" / "Energía Regular" / "Buena Energía" / "Energía Muy Alta",
+  "energia_desc": "2 oraciones específicas sobre el campo energético de ${nombre} en este momento",
+  "chakras": {"corona":0-100,"tercer_ojo":0-100,"garganta":0-100,"corazon":0-100,"plexo":0-100,"sacro":0-100,"raiz":0-100},
+  "emociones_bloqueadas": ["emoción1","emoción2","emoción3"],
+  "emociones_limitantes": ["emoción1","emoción2"],
+  "interferencias": {
+    "Bloqueos Energéticos":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"/"Muy Fuerte"},
+    "Almas en Pena":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Brujería / Hechizos":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Entidades Negativas":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Larvas Energéticas":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Magia Negra":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Mal de Ojo":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Envidia":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Tapón Energético":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"},
+    "Contratos Kármicos":{"detectada":bool,"nivel":"Leve"/"Moderado"/"Fuerte"}
+  },
+  "meditacion": {
+    "titulo": "nombre evocador de la meditación",
+    "duracion": "X minutos",
+    "pasos": ["paso detallado 1","paso detallado 2","paso detallado 3","paso detallado 4","paso detallado 5"]
+  },
+  "ritual": {
+    "titulo": "nombre del ritual específico",
+    "materiales": ["material1","material2","material3","material4"],
+    "pasos": ["paso detallado 1","paso detallado 2","paso detallado 3","paso detallado 4"]
+  },
+  "mensaje": "Mensaje espiritual cálido, poderoso y esperanzador de 3-4 oraciones firmado desde el corazón de Marian, personalizado para ${nombre}"
+}`;
+
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1600,
+        messages:[{role:'user',content:prompt}]})
+    });
+    const data=await res.json();
+    const txt=data.content.map(b=>b.text||'').join('');
+    const result=JSON.parse(txt.replace(/```json|```/g,'').trim());
+    clearInterval(iv);
+    mostrar(result,isPro);
+  }catch(e){
+    clearInterval(iv);
+    mostrar(fallback(sensacion),isPro);
+  }
+}
+
+function mostrar(d,pro){
+  document.getElementById('loadSec').classList.remove('on');
+  document.getElementById('resSec').classList.add('on');
+
+  // ENERGÍA
+  const pct=Math.min(100,Math.max(0,d.energia_pct||50));
+  setTimeout(()=>{
+    const arc=document.getElementById('eArc');
+    arc.style.strokeDashoffset=452.4-(pct/100)*452.4;
+    arc.style.transition='stroke-dashoffset 2s cubic-bezier(.4,0,.2,1)';
+    animNum(document.getElementById('eVal'),0,pct,2000,v=>v+'%');
+  },200);
+  document.getElementById('estadoBadgeWrap').innerHTML=
+    `<div class="estado-badge e-${d.estado||'REGULAR'}">✦ ${d.estado_label||'Energía Regular'}</div>`;
+  document.getElementById('eDesc').textContent=d.energia_desc||'';
+
+  // CHAKRAS
+  const cl=document.getElementById('chakraList'); cl.innerHTML='';
+  CHAKRAS.forEach((ch,i)=>{
+    const val=d.chakras?.[ch.key]??50;
+    const si=Math.round((val/100)*(ESTADOS_CHAKRA.length-1));
+    const row=document.createElement('div'); row.className='chakra-row';
+    row.innerHTML=`
+      <div class="c-dot" style="background:${ch.color}1a;border-color:${ch.color}55;--cc:${ch.color}">${ch.emoji}</div>
+      <div>
+        <div class="c-name">${ch.name}</div>
+        <div class="c-bar-bg"><div class="c-bar" id="cb-${ch.key}" style="background:${ch.color};box-shadow:0 0 8px ${ch.color};"></div></div>
+        <div class="c-state">${ESTADOS_CHAKRA[si]}</div>
+      </div>
+      <div class="c-pct" id="cp-${ch.key}">0%</div>`;
+    cl.appendChild(row);
+    setTimeout(()=>{
+      document.getElementById(`cb-${ch.key}`).style.width=val+'%';
+      animNum(document.getElementById(`cp-${ch.key}`),0,val,1600,v=>v+'%');
+    },300+i*80);
+  });
+
+  // EMOCIONES
+  const eg=document.getElementById('emocGrid'); eg.innerHTML='';
+  (d.emociones_bloqueadas||[]).forEach(e=>{
+    const t=document.createElement('div');
+    t.className='emoc-tag emoc-bloqueada';t.textContent='🔴 '+e;eg.appendChild(t);
+  });
+  (d.emociones_limitantes||[]).forEach(e=>{
+    const t=document.createElement('div');
+    t.className='emoc-tag emoc-limitante';t.textContent='🟡 '+e;eg.appendChild(t);
+  });
+  if(pro){
+    document.getElementById('emocLock').style.display='none';
+    document.getElementById('emocGrid').style.filter='none';
+  }
+
+  // INTERFERENCIAS — gratis: solo Larvas y Tapón; pro: todas
+  const FREE_INTERFS=['Larvas Energéticas','Tapón Energético'];
+  const ilfree=document.getElementById('interfListFree'); ilfree.innerHTML='';
+  const ilpro=document.getElementById('interfListPro');  ilpro.innerHTML='';
+
+  INTERFS.forEach(interf=>{
+    const info=d.interferencias?.[interf.name]||{detectada:false};
+    const item=document.createElement('div');
+    item.className='interf-item '+(info.detectada?'detected':'clear');
+    item.innerHTML=`
+      <div class="i-icon">${interf.icon}</div>
+      <div class="i-body">
+        <div class="i-name">${interf.name}</div>
+        <div class="i-status">${info.detectada?'⚠ Detectado':'✓ Campo limpio'}</div>
+        ${info.detectada?`<div class="i-nivel">Intensidad: ${info.nivel||'Leve'}</div>`:''}
+      </div>`;
+    if(FREE_INTERFS.includes(interf.name)){
+      ilfree.appendChild(item);
+    } else {
+      ilpro.appendChild(item);
+    }
+  });
+
+  // Si es PRO, mostrar todas sin lock
+  if(pro){
+    document.getElementById('interfLock').style.display='none';
+    document.getElementById('interfListPro').style.filter='none';
+  }
+
+  // MEDITACIÓN
+  if(pro&&d.meditacion){
+    document.getElementById('medLock').style.display='none';
+    const mc=document.getElementById('medContent');
+    mc.style.filter='none';
+    mc.innerHTML=`<div class="med-card">
+      <div class="card-title">🧘 ${d.meditacion.titulo} · ${d.meditacion.duracion}</div>
+      <ul class="steps">${(d.meditacion.pasos||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  // RITUAL
+  if(pro&&d.ritual){
+    document.getElementById('ritualLock').style.display='none';
+    const rc=document.getElementById('ritualContent');
+    rc.style.filter='none';
+    rc.innerHTML=`<div class="ritual-card">
+      <div class="card-title">🕯️ ${d.ritual.titulo}</div>
+      <div class="card-body" style="margin-bottom:12px;">
+        <span style="color:var(--gold);font-size:.72rem;letter-spacing:.1em;font-style:normal;">MATERIALES:</span><br>
+        ${(d.ritual.materiales||[]).join(' · ')}
+      </div>
+      <ul class="steps">${(d.ritual.pasos||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  // MENSAJE
+  document.getElementById('msgBox').textContent=d.mensaje||'';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function animNum(el,from,to,dur,fmt){
+  const s=performance.now();
+  (function u(n){
+    const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=fmt(Math.round(from+(to-from)*e));
+    if(p<1)requestAnimationFrame(u);
+  })(s);
+}
+
+function fallback(s){
+  const m={muy_mal:12,pesado:26,ansioso:36,triste:30,confundido:42,regular:50,bien:68,excelente:86};
+  const base=m[s]||50;
+  const r=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+  const idx=Math.min(4,Math.floor(base/22));
+  const estados=['MUY_MALO','MALO','REGULAR','BUENO','MUY_BUENO'];
+  const labels=['Energía Muy Baja','Energía Baja','Energía Regular','Buena Energía','Energía Muy Alta'];
+  return{
+    energia_pct:base+r(-6,6),estado:estados[idx],estado_label:labels[idx],
+    energia_desc:'Tu campo áurico tiene patrones únicos que el péndulo de Marian ha captado. La energía fluye de una manera particular en este momento de tu vida.',
+    chakras:{corona:r(20,78),tercer_ojo:r(20,78),garganta:r(20,78),corazon:r(20,78),plexo:r(20,78),sacro:r(20,78),raiz:r(20,78)},
+    emociones_bloqueadas:['Miedo al rechazo','Tristeza acumulada','Resentimiento'],
+    emociones_limitantes:['Ansiedad','Culpa profunda'],
+    interferencias:Object.fromEntries(INTERFS.map(i=>[i.name,{detectada:Math.random()>.55,nivel:'Leve'}])),
+    meditacion:{titulo:'Meditación de Limpieza Áurica con Luz Plateada',duracion:'12 minutos',
+      pasos:['Encontrá un lugar tranquilo y cerrar los ojos suavemente',
+        'Respirá profundo 7 veces, soltando tensión en cada exhalación',
+        'Visualizá una luz plateada y azul descendiendo desde el cosmos hacia tu corona',
+        'Sentí cómo esa luz recorre cada chakra limpiando y sanando',
+        'Agradecé al universo y a tu guía espiritual antes de abrir los ojos']},
+    ritual:{titulo:'Ritual de Protección y Limpieza Energética',
+      materiales:['Vela blanca o azul','Sal marina gruesa','Incienso de sándalo','Cuarzo transparente o selenita'],
+      pasos:['Formá un círculo de sal alrededor de la vela encendida',
+        'Sosté el cristal en tus manos y pedí protección con tus propias palabras',
+        'Pasá el incienso humeante por todo tu cuerpo de pies a cabeza',
+        'Dejá que la vela se consuma completamente o apagala con los dedos nunca soplando']},
+    mensaje:'Querida alma, el universo te envía esta lectura en el momento exacto que la necesitás. Tu energía tiene la capacidad de renovarse completamente cuando te permitís soltar lo que ya no te sirve. Marian te acompaña en este camino de sanación y elevación. Recordá que la luz siempre es más poderosa que la oscuridad.'
+  };
+}
+
+function irAMercadoPago(){
+  // Link de pago MP — reemplazar con tu link real de suscripción de MP
+  // Para crear tu link: mp.com.ar > Tu negocio > Cobrar > Crear link de pago
+  const mpUrl='https://link.mercadopago.com.ar/mariana109';
+  window.open(mpUrl,'_blank');
+}
+
+function reset(){
+  document.getElementById('resSec').classList.remove('on');
+  document.getElementById('formSec').style.display='block';
+  ['nombre','preocupa'].forEach(id=>document.getElementById(id).value='');
+  ['sensacion','tiempo'].forEach(id=>document.getElementById(id).value='');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openModal(){document.getElementById('modalBg').classList.add('on');}
+function closeModal(){document.getElementById('modalBg').classList.remove('on');}
+function closeModalOut(e){if(e.target===document.getElementById('modalBg'))closeModal();}
+</script>
+</body>
+</html>
